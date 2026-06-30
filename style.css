@@ -4,6 +4,7 @@
   --verde-principal: #34A203;
   --verde-lima: #6EC007;
   --amarelo-lima: #C1D11F;
+  --areia-clara: #FBFBF2;   
   --texto-escuro: #1B2A33;
   --branco: #FFFFFF;
 }
@@ -16,75 +17,91 @@
 
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background-color: var(--amarelo-lima);
+  background-color: var(--areia-clara); 
   color: var(--texto-escuro);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* Cabecalho */
+/* ===== Cabecalho ===== */
 header {
   background: linear-gradient(135deg, var(--verde-escuro), var(--verde-medio));
   color: var(--branco);
-  padding: 50px 20px;
+  padding: 48px 20px 60px;
   text-align: center;
+  position: relative;
 }
 
 .logo-container {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
+
 .marca-monumental {
-  font-size: 5rem;
+  font-size: 3.2rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 4px;
-  color: #34A203;
-  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
+  letter-spacing: 6px;
+  color: var(--branco);
+  text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.25);
   display: inline-block;
 }
 
-header h1 {
-  font-size: 1.6rem;
-  margin-bottom: 8px;
-  color: #000000;
+
+.marca-monumental span {
+  color: var(--amarelo-lima);
 }
 
-header p {
+header h1 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--branco); 
+}
+
+header p.impacto {
   font-size: 0.95rem;
-  color: var(--amarelo-lima);
-  max-width: 600px;
+  color: #E8F2CC;
+  max-width: 560px;
   margin: 0 auto;
 }
 
-/* Estrutura Geral */
+
+.onda-divisor {
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-top: -2px;
+}
+
+/* ===== Estrutura geral ===== */
 main {
   max-width: 700px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px 20px;
 }
 
 section {
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 
 section h2 {
   color: var(--verde-escuro);
   font-size: 1.2rem;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   border-left: 4px solid var(--verde-principal);
   padding-left: 10px;
 }
 
-/* Formulario de Denuncia */
+/* ===== Formulario de Denuncia ===== */
 .form-card {
   background: var(--branco);
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 97, 14, 0.1);
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 3px 12px rgba(0, 97, 14, 0.1);
 }
 
 .form-group {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .form-group label {
@@ -98,25 +115,26 @@ section h2 {
 .btn-upload {
   width: 100%;
   padding: 12px;
-  background-color: var(--amarelo-lima);
+  background-color: #F4F7E3;
   border: 2px dashed var(--verde-principal);
   border-radius: 8px;
   color: var(--texto-escuro);
   font-size: 0.9rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .btn-upload:hover {
-  background-color: var(--verde-lima);
+  background-color: #E9F1C8;
+  border-color: var(--verde-escuro);
 }
 
 .gps-field {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #d8d8d8;
   border-radius: 8px;
-  background-color: var(--branco);
+  background-color: var(--areia-clara);
   font-size: 0.9rem;
   color: var(--texto-escuro);
 }
@@ -138,10 +156,18 @@ section h2 {
   background-color: var(--verde-medio);
 }
 
-/* Painel de Monitoramento */
+/* Foco visivel via teclado, acessibilidade */
+.btn-upload:focus-visible,
+.btn-enviar:focus-visible,
+.gps-field:focus-visible {
+  outline: 3px solid var(--amarelo-lima);
+  outline-offset: 2px;
+}
+
+/* ===== Painel de Monitoramento ===== */
 .mapa-placeholder {
-  background-color: var(--verde-lima);
-  border-radius: 10px;
+  background-color: #EAF5D1;
+  border-radius: 12px;
   height: 220px;
   display: flex;
   align-items: center;
@@ -149,8 +175,9 @@ section h2 {
   color: var(--verde-escuro);
   font-weight: bold;
   text-align: center;
-  margin-bottom: 16px;
-  border: 2px dashed var(--verde-escuro);
+  margin-bottom: 18px;
+  border: 2px dashed var(--verde-principal);
+  padding: 0 20px;
 }
 
 .cards-resumo {
@@ -161,11 +188,16 @@ section h2 {
 
 .card {
   background: var(--branco);
-  border-radius: 10px;
-  padding: 16px 10px;
+  border-radius: 12px;
+  padding: 18px 10px;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0, 97, 14, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 97, 14, 0.1);
   border-top: 4px solid var(--verde-principal);
+  transition: transform 0.15s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
 }
 
 .card .valor {
@@ -181,23 +213,14 @@ section h2 {
   color: var(--texto-escuro);
 }
 
-.marca {
-  font-size: 0.85rem;
-  font-weight: bold;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--verde-principal);
-  margin-bottom: 6px;
-}
-
-/* Rodape */
+/* ===== Rodape ===== */
 footer {
   background-color: var(--verde-escuro);
-  color: #000000;
+  color: var(--branco); 
   text-align: center;
-  padding: 30px 20px;
+  padding: 28px 20px;
   font-size: 0.85rem;
-  border-top: 4px solid #34A203;
+  border-top: 4px solid var(--verde-principal);
 }
 
 footer p {
@@ -209,18 +232,18 @@ footer p:last-child {
   color: var(--amarelo-lima);
 }
 
-/* Telas Pequenas (Mobile) */
+/* ===== Telas pequenas (mobile) ===== */
 @media (max-width: 480px) {
   .cards-resumo {
     grid-template-columns: 1fr;
   }
 
   header h1 {
-    font-size: 1.3rem;
+    font-size: 1.15rem;
   }
 
   .marca-monumental {
-    font-size: 3rem;
-    letter-spacing: 2px;
+    font-size: 2.2rem;
+    letter-spacing: 3px;
   }
 }
