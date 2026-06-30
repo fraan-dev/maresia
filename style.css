@@ -1,0 +1,265 @@
+:root {
+  --azul-mar-escuro: #023E73;
+  --azul-mar: #0466A6;
+  --azul-claro: #5FA8D3;
+  --verde-areia: #6B9080;
+  --areia: #F2EDDE;
+  --areia-clara: #FAF7F0;
+  --texto-escuro: #1B2A33;
+  --branco: #FFFFFF;
+  --alerta: #D97B4F;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: var(--areia-clara);
+  color: var(--texto-escuro);
+  line-height: 1.5;
+}
+
+/* Cabecalho */
+header {
+  background: linear-gradient(135deg,  #6EC007, var(--verde-areia));
+  color: var(--branco);
+  padding: 32px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+header p {
+  font-size: 0.95rem;
+  color: var(--areia);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Estrutura Geral */
+main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 32px;
+}
+
+section h2 {
+  color: var(--azul-mar-escuro);
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  border-left: 4px solid var(--verde-areia);
+  padding-left: 10px;
+}
+
+/* Formulario de Denuncia */
+.form-card {
+  background: var(--branco);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(2, 62, 115, 0.1);
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: var(--azul-mar-escuro);
+}
+
+.btn-upload {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--areia);
+  border: 2px dashed var(--verde-areia);
+  border-radius: 8px;
+  color: var(--texto-escuro);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-upload:hover {
+  background-color: #e9e2cb;
+}
+
+.gps-field {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: var(--areia-clara);
+  font-size: 0.9rem;
+  color: var(--texto-escuro);
+}
+
+.btn-enviar {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--alerta);
+  color: var(--branco);
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-enviar:hover {
+  background-color: #c2693e;
+}
+
+/* Painel de Monitoramento */
+.mapa-placeholder {
+  background-color:  #6EC007;
+  border-radius: 10px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--branco);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 16px;
+  border: 2px dashed var(--azul-mar-escuro);
+}
+
+.cards-resumo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.card {
+  background: var(--branco);
+  border-radius: 10px;
+  padding: 16px 10px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(2, 62, 115, 0.08);
+  border-top: 4px solid var(--verde-areia);
+}
+
+.card .valor {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--azul-mar-escuro);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.card .rotulo {
+  font-size: 0.75rem;
+  color: var(--texto-escuro);
+}
+
+.marca {
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--verde-areia);
+  margin-bottom: 6px;
+}
+
+/* Rodape */
+footer {
+  background-color:  #6EC007;
+  color: var(--areia);
+  text-align: center;
+  padding: 20px;
+  font-size: 0.8rem;
+}
+
+/* Telas Pequenas (Mobile) */
+@media (max-width: 480px) {
+  .cards-resumo {
+    grid-template-columns: 1fr;
+  }
+
+  header h1 {
+    font-size: 1.3rem;
+  }
+}
+/* Cabecalho */
+header {
+  background: linear-gradient(135deg, var(--verde-escuro), var(--verde-medio));
+  color: var(--branco);
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.logo-container {
+  margin-bottom: 15px;
+}
+
+.marca-monumental {
+  font-size: 5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: #34A203;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
+  display: inline-block;
+}
+header h1 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+  color: black;
+}
+
+header p {
+  font-size: 0.95rem;
+  color: var(--amarelo-lima);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Telas Pequenas (Mobile) */
+@media (max-width: 480px) {
+  .cards-resumo {
+    grid-template-columns: 1fr;
+  }
+
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+  .marca-monumental {
+    font-size: 3rem;
+    letter-spacing: 2px;
+  }
+}
+/* Rodape */
+footer {
+  background-color: var(--verde-escuro);
+  color: black;
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 0.85rem;
+  border-top: 4px solid #34A203;
+}
+
+footer p {
+  margin-bottom: 6px;
+}
+
+footer p:last-child {
+  margin-bottom: 0;
+  color: var(--amarelo-lima);
+}

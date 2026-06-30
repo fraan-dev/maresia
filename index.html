@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maresia - Mapeamento Inteligente de Residuos - Barra de Cunhau</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  
+  <header>
+    <div class="logo-container">
+      <span class="marca-monumental">Maresia</span>
+    </div>
+    <h1>Mapeamento Inteligente de Resíduos - Barra de Cunhaú RN</h1>
+    
+  </header>
+
+  <main>
+
+    <section id="denuncia">
+      <h2>Registrar Ocorrencia</h2>
+      <div class="form-card">
+
+        <div class="form-group">
+          <label for="upload-foto">Foto do residuo</label>
+          <button type="button" class="btn-upload" id="upload-foto">
+            Toque para simular o upload da foto
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label for="gps">Coordenadas GPS (simuladas)</label>
+          <input type="text" id="gps" class="gps-field" value="-6.2533, -35.0589" readonly>
+        </div>
+
+        <div class="form-group">
+          <label for="tipo-residuo">Tipo de residuo encontrado</label>
+          <select id="tipo-residuo" class="gps-field">
+            <option>Plastico</option>
+            <option>Vidro</option>
+            <option>Metal</option>
+            <option>Outro</option>
+          </select>
+        </div>
+
+        <button type="button" class="btn-enviar">Enviar Denuncia</button>
+
+      </div>
+    </section>
+
+    <section id="monitoramento">
+      <h2>Painel de Monitoramento</h2>
+
+      <div class="mapa-placeholder">
+        Mapa interativo da Praia de Barra de Cunhau (em desenvolvimento)
+      </div>
+
+      <div class="cards-resumo">
+        <div class="card">
+          <span class="valor">128</span>
+          <span class="rotulo">Total de ocorrencias</span>
+        </div>
+        <div class="card">
+          <span class="valor">Plastico</span>
+          <span class="rotulo">Residuo mais encontrado</span>
+        </div>
+        <div class="card">
+          <span class="valor">2,3 km</span>
+          <span class="rotulo">Mutirao mais proximo</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Maresia - Projeto academico da disciplina de educacao ambiental - IFRN Canguaretama</p>
+    <p>Praia de Barra de Cunhau, Canguaretama - RN</p>
+  </footer>
+
+</body>
+</html>
