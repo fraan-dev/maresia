@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MaresIA</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #083f4d 0%, #087d91 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 24px;
+            padding: 50px 40px 40px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-logo .icon {
+            font-size: 52px;
+            color: #087d91;
+            display: block;
+        }
+
+        .login-logo h1 {
+            font-size: 28px;
+            color: #083f4d;
+            margin-top: 8px;
+            font-weight: 700;
+        }
+
+        .login-logo p {
+            color: #666;
+            font-size: 15px;
+            margin-top: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e8edf2;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'DM Sans', sans-serif;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: #f8fafc;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #087d91;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(8, 125, 145, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: #087d91;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            font-family: 'DM Sans', sans-serif;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-login:hover {
+            background: #065f6e;
+            transform: translateY(-2px);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .error-msg {
+            background: #fde8e8;
+            color: #c0392b;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            display: none;
+            font-size: 14px;
+            text-align: center;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .error-msg.show {
+            display: block;
+        }
+
+        .info-box {
+            text-align: center;
+            margin-top: 24px;
+            padding: 16px;
+            background: #f0f7fa;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #555;
+            border: 1px dashed #bdd8e0;
+        }
+
+        .info-box strong {
+            color: #083f4d;
+        }
+
+        .info-box .credentials {
+            margin-top: 6px;
+            font-weight: 500;
+            color: #087d91;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .back-link a {
+            color: #087d91;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .back-link a:hover {
+            color: #065f6e;
+            text-decoration: underline;
+        }
+
+        .login-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0 16px;
+        }
+
+        .login-divider::before,
+        .login-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #e8edf2;
+        }
+
+        .login-divider span {
+            padding: 0 12px;
+            color: #999;
+            font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <!-- LOGO -->
+        <div class="login-logo">
+            <span class="icon">≈</span>
+            <h1>MaresIA</h1>
+            <p>Painel do Gestor Ambiental</p>
+        </div>
+
+        <!-- MENSAGEM DE ERRO -->
+        <div class="error-msg" id="errorMsg">
+            ❌ Email ou senha incorretos. Tente novamente.
+        </div>
+
+        <!-- FORMULÁRIO -->
+        <div class="form-group">
+            <label for="email">📧 Email</label>
+            <input type="email" id="email" placeholder="Digite seu email" value="admin@maresia.com">
+        </div>
+
+        <div class="form-group">
+            <label for="senha">🔒 Senha</label>
+            <input type="password" id="senha" placeholder="Digite sua senha" value="admin123">
+        </div>
+
+        <button class="btn-login" onclick="fazerLogin()">🚀 Entrar no Painel</button>
+
+        <div class="login-divider">
+            <span>ou</span>
+        </div>
+
+        <!-- INFORMAÇÕES DE ACESSO -->
+        <div class="info-box">
+            <strong>🔑 Credenciais de acesso</strong>
+            <div class="credentials">
+                📧 admin@maresia.com<br>
+                🔒 admin123
+            </div>
+            <small style="display:block; margin-top:6px; color:#888;">
+                * Apenas administradores têm acesso ao painel
+            </small>
+        </div>
+
+        <div class="back-link">
+            <a href="/">← Voltar ao mapa público</a>
+        </div>
+    </div>
+
+    <script>
+        async function fazerLogin() {
+            const email = document.getElementById('email').value.trim();
+            const senha = document.getElementById('senha').value.trim();
+            const error = document.getElementById('errorMsg');
+
+            // Oculta erro anterior
+            error.classList.remove('show');
+
+            // Valida campos
+            if (!email || !senha) {
+                error.textContent = '❌ Preencha todos os campos!';
+                error.classList.add('show');
+                return;
+            }
+
+            try {
+                // Busca todos os usuários da API
+                const response = await fetch('/api/usuarios');
+                
+                if (!response.ok) {
+                    throw new Error('Erro ao conectar com o servidor');
+                }
+
+                const usuarios = await response.json();
+
+                // Procura o usuário
+                const usuario = usuarios.find(u =>
+                    u.email.toLowerCase() === email.toLowerCase() &&
+                    u.senha === senha
+                );
+
+                // Verifica se é admin
+                if (usuario && usuario.admin === true) {
+                    // Salva na sessão
+                    sessionStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+                    // Redireciona para o painel
+                    window.location.href = '/admin.html';
+                } else if (usuario && usuario.admin === false) {
+                    error.textContent = '❌ Este usuário não tem permissão de administrador.';
+                    error.classList.add('show');
+                } else {
+                    error.textContent = '❌ Email ou senha incorretos. Use admin@maresia.com / admin123';
+                    error.classList.add('show');
+                }
+
+            } catch (erro) {
+                console.error('Erro no login:', erro);
+                error.textContent = '❌ Erro ao conectar com o servidor: ' + erro.message;
+                error.classList.add('show');
+            }
+        }
+
+        // Tecla Enter para enviar
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                fazerLogin();
+            }
+        });
+
+        // Limpa erro ao digitar
+        document.getElementById('email').addEventListener('input', function() {
+            document.getElementById('errorMsg').classList.remove('show');
+        });
+        document.getElementById('senha').addEventListener('input', function() {
+            document.getElementById('errorMsg').classList.remove('show');
+        });
+    </script>
+
+</body>
+</html>

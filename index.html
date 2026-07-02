@@ -1,103 +1,330 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Maresia: mapeamento colaborativo de resíduos nas praias de Barra do Cunhaú.">
-  <title>Maresia — Cuidar da praia começa aqui</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta name="theme-color" content="#083f4d">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MaresIA: mapeamento inteligente de resíduos nas praias de Barra do Cunhaú e Baía Formosa.">
+    <title>MaresIA — Mapeamento Intelligent de Resíduos</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="theme-color" content="#083f4d">
+    
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet e Estilos -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .ia-hint {
+            display: block;
+            margin-top: 4px;
+            font-size: 12px;
+            color: #087d91;
+            font-weight: 500;
+        }
+        .ia-hint span {
+            background: #e8f4f6;
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+        .success-enhanced {
+            display: none;
+            background: #e8f8f5;
+            border: 2px solid #27ae60;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 16px;
+            align-items: center;
+            gap: 14px;
+        }
+        .success-enhanced.show {
+            display: flex;
+        }
+        .success-enhanced .icon {
+            font-size: 32px;
+        }
+        .success-enhanced .text strong {
+            font-size: 18px;
+            color: #1a7a4a;
+        }
+        .success-enhanced .text small {
+            color: #555;
+            font-size: 14px;
+        }
+        .nav-link-gestor {
+            background: #083f4d;
+            color: white !important;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .nav-link-gestor:hover {
+            background: #065f6e;
+        }
+    </style>
 </head>
 <body>
-  <header class="topo">
-    <nav class="nav container" aria-label="Navegação principal">
-      <a class="logo" href="#inicio" aria-label="Maresia — início">
-        <span class="logo-icon" aria-hidden="true">≈</span>
-        <span>maresia</span>
-      </a>
-      <div class="nav-links">
-        <a href="#como-funciona">Como funciona</a>
-        <a href="#mapa">Mapa</a>
-        <a class="nav-cta" href="#denuncia">Fazer denúncia</a>
-      </div>
-    </nav>
 
-    <section class="hero container" id="inicio">
-      <div class="hero-copy">
-        <span class="eyebrow"><span></span> Barra do Cunhaú e Baía Formosa · RN</span>
-        <h1>A praia fala.<br><em>A gente escuta.</em></h1>
-        <p>Mapeie resíduos, ajude a identificar áreas críticas e mobilize a comunidade para manter nossas praias vivas.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#denuncia">Registrar resíduo <span>→</span></a>
-          <a class="btn btn-link" href="#mapa"><span class="play">▶</span> Explorar o mapa</a>
+    <!-- HEADER -->
+    <header class="topo">
+        <nav class="nav container" aria-label="Navegação principal">
+            <a class="logo" href="#inicio" aria-label="MaresIA — início">
+                <span class="logo-icon" aria-hidden="true">≈</span>
+                <span>maresia</span>
+            </a>
+            <div class="nav-links">
+                <a href="#como-funciona">Como funciona</a>
+                <a href="#mapa">Mapa</a>
+                <a class="nav-cta" href="#denuncia">Fazer denúncia</a>
+                <a href="/login.html" class="nav-link-gestor">Gestor</a>
+            </div>
+        </nav>
+
+        <!-- HERO -->
+        <section class="hero container" id="inicio">
+            <div class="hero-copy">
+                <span class="eyebrow"><span></span> Barra do Cunhaú e Baía Formosa · RN</span>
+                <h1>A praia fala.<br><em>A gente escuta.</em></h1>
+                <p>Mapeie resíduos, ajude a identificar áreas críticas e mobilize a comunidade para manter nossas praias vivas.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#denuncia">Registrar resíduo <span>→</span></a>
+                    <a class="btn btn-link" href="#mapa"><span class="play">▶</span> Explorar o mapa</a>
+                </div>
+                <div class="trust">
+                    <div class="avatars"><i>MA</i><i>RL</i><i>JS</i></div>
+                    <p><strong><span id="hero-count">0</span> registros</strong><br>salvos pela comunidade</p>
+                </div>
+            </div>
+            <div class="hero-visual" aria-label="Ilustração de uma praia limpa ao pôr do sol">
+                <div class="sun"></div>
+                <div class="cloud c1"></div>
+                <div class="cloud c2"></div>
+                <div class="hill h1"></div>
+                <div class="hill h2"></div>
+                <div class="sea"><i></i><i></i><i></i></div>
+                <div class="sand"></div>
+                <div class="palm"><b></b><b></b><b></b><b></b><span></span></div>
+                <div class="visual-card">
+                    <span class="pin">●</span>
+                    <p><small>ÚLTIMO REGISTRO</small><strong>Garrafas plásticas</strong><span>Praia do Pontal · há 12 min</span></p>
+                </div>
+            </div>
+        </section>
+        <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0 34c240 58 420-26 720 8s492 26 720-20v58H0Z"/>
+        </svg>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+
+        <!-- COMO FUNCIONA -->
+        <section class="steps container" id="como-funciona">
+            <div class="section-heading">
+                <span class="eyebrow dark"><span></span> Sua atitude faz a diferença</span>
+                <h2>Encontrou lixo na praia?</h2>
+                <p>Em menos de um minuto, seu registro vira informação para quem pode agir.</p>
+            </div>
+            <div class="step-grid">
+                <article>
+                    <span class="step-number">01</span>
+                    <div class="step-icon">⌁</div>
+                    <h3>Fotografe</h3>
+                    <p>Registre o resíduo encontrado de forma clara e segura.</p>
+                </article>
+                <article>
+                    <span class="step-number">02</span>
+                    <div class="step-icon">⌖</div>
+                    <h3>Localize</h3>
+                    <p>Confirme a localização para marcar o ponto exato no mapa.</p>
+                </article>
+                <article>
+                    <span class="step-number">03</span>
+                    <div class="step-icon">✓</div>
+                    <h3>Denuncie</h3>
+                    <p>Envie o registro e ajude a mobilizar uma resposta coletiva.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- FORMULÁRIO DE DENÚNCIA -->
+        <section class="report-section" id="denuncia">
+            <div class="container report-layout">
+                <div class="report-copy">
+                    <span class="eyebrow light"><span></span> Faça sua parte</span>
+                    <h2>Registre uma<br>ocorrência</h2>
+                    <p>Cada ponto no mapa ajuda pesquisadores, voluntários e órgãos locais a entender onde agir primeiro.</p>
+                    <blockquote>“A mudança começa quando enxergamos o problema juntos.”</blockquote>
+                </div>
+
+                <form class="report-card" id="report-form">
+                    <div class="form-title">
+                        <div><span>1</span></div>
+                        <p><strong>Conte o que você encontrou</strong><small>Leva menos de 1 minuto</small></p>
+                    </div>
+
+                    <!-- UPLOAD DE FOTO -->
+                    <label class="upload-zone" for="foto">
+                        <input type="file" id="foto" accept="image/*">
+                        <span class="camera">⌑</span>
+                        <strong id="upload-title">Adicione uma foto</strong>
+                        <small id="upload-text">Arraste ou toque para selecionar · PNG ou JPG</small>
+                    </label>
+
+                    <!-- TIPO E QUANTIDADE -->
+                    <div class="field-row">
+                        <label class="field">
+                            <span>Tipo de resíduo</span>
+                            <select id="tipo">
+                                <option value="">Selecione uma categoria ou deixe em branco para a IA</option>
+                                <option>Plástico</option>
+                                <option>Vidro</option>
+                                <option>Metal</option>
+                                <option>Rede de pesca</option>
+                                <option>Resíduo orgânico</option>
+                                <option>Outro</option>
+                            </select>
+                            <small class="ia-hint"><span>Deixe em branco e a IA classifica automaticamente!</span></small>
+                        </label>
+
+                        <label class="field">
+                            <span>Quantidade aproximada</span>
+                            <select id="quantidade">
+                                <option>Pouco (1–5 itens)</option>
+                                <option>Médio (6–20 itens)</option>
+                                <option>Muito (+20 itens)</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <!-- COMENTÁRIO -->
+                    <label class="field">
+                        <span>Comentário sobre o local</span>
+                        <textarea id="comentario" maxlength="280" placeholder="Ex.: Há muitas garrafas próximas às pedras..." required></textarea>
+                        <small class="char-count"><span id="char-count">0</span>/280</small>
+                    </label>
+
+                    <!-- LOCALIZAÇÃO -->
+                    <label class="field">
+                        <span>Localização do registro</span>
+                        <div class="location-input">
+                            <span>⌖</span>
+                            <input id="gps" value="Nenhuma localização marcada" readonly>
+                            <button type="button" id="location-btn">Usar GPS</button>
+                        </div>
+                        <div class="location-options">
+                            <small class="location-feedback" id="location-feedback">Use o GPS ou escolha o ponto diretamente no mapa.</small>
+                            <button type="button" id="manual-location-btn">Escolher no mapa →</button>
+                        </div>
+                    </label>
+
+                    <!-- ENVIAR -->
+                    <button class="submit-btn" type="submit">Enviar denúncia <span>→</span></button>
+                    <p class="privacy">Seus dados pessoais não serão divulgados.</p>
+
+                    <!-- MENSAGEM DE SUCESSO -->
+                    <div class="success-enhanced" id="success">
+                        <span class="icon">✓</span>
+                        <div class="text">
+                            <strong>Ocorrência realizada com sucesso!</strong>
+                            <br>
+                            <small id="success-time">📅 </small>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- MAPA -->
+        <section class="dashboard container" id="mapa">
+            <div class="section-heading left">
+                <span class="eyebrow dark"><span></span> Panorama local</span>
+                <h2>O que o mapa nos conta</h2>
+                <p>Dados colaborativos que revelam os pontos que mais precisam de atenção.</p>
+                <div class="map-legend">
+                    <span><i class="pending"></i> Denúncia pendente</span>
+                    <span><i class="resolved"></i> Resolvido</span>
+                    <span><i class="community"></i> Ponto livre</span>
+                    <span><i class="selected"></i> Local selecionado</span>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="map-card">
+                    <div class="map-head">
+                        <p><strong>Barra do Cunhaú</strong><span id="map-status">Clique livremente no mapa para comentar e registrar um ponto</span></p>
+                        <button class="map-locate" id="map-location-btn" type="button">⌖ Marcar minha localização</button>
+                    </div>
+                    <div id="leaflet-map" aria-label="Mapa interativo de ocorrências em Barra do Cunhaú"></div>
+                </div>
+
+                <!-- PAINEL ADMINISTRATIVO (COMENTADO)
+                <aside class="records-panel">
+                    <div class="records-summary">
+                        <div><strong id="total-count">0</strong><span>registros</span></div>
+                        <div><strong id="pending-count">0</strong><span>pendentes</span></div>
+                        <div><strong id="resolved-count">0</strong><span>resolvidos</span></div>
+                    </div>
+                    <div class="records-head">
+                        <div><strong>Registros recentes</strong><span>Clique para localizar no mapa</span></div>
+                        <select id="status-filter" aria-label="Filtrar registros">
+                            <option value="all">Todos</option>
+                            <option value="pending">Não resolvidos</option>
+                            <option value="resolved">Resolvidos</option>
+                        </select>
+                    </div>
+                    <div class="records-list" id="records-list"></div>
+                </aside>
+                -->
+            </div>
+        </section>
+
+        <!-- CALL TO ACTION FINAL -->
+        <section class="cta">
+            <div class="container">
+                <div>
+                    <span class="eyebrow light"><span></span> Juntos pela costa</span>
+                    <h2>Uma praia limpa começa<br>com um olhar atento.</h2>
+                </div>
+                <a class="btn btn-white" href="#denuncia">Fazer meu registro <span>→</span></a>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <a class="logo" href="#inicio">
+                    <span class="logo-icon">≈</span>
+                    <span>maresia</span>
+                </a>
+                <p>Tecnologia e comunidade unidas pela preservação das nossas praias.</p>
+            </div>
+            <div>
+                <strong>Navegue</strong>
+                <a href="#como-funciona">Como funciona</a>
+                <a href="#mapa">Mapa de ocorrências</a>
+                <a href="#denuncia">Fazer denúncia</a>
+            </div>
+            <div>
+                <strong>Projeto acadêmico</strong>
+                <p>Educação Ambiental<br>IFRN · Campus Canguaretama</p>
+            </div>
         </div>
-        <div class="trust"><div class="avatars"><i>MA</i><i>RL</i><i>JS</i></div><p><strong><span id="hero-count">0</span> registros</strong><br>salvos pela comunidade</p></div>
-      </div>
-      <div class="hero-visual" aria-label="Ilustração de uma praia limpa ao pôr do sol">
-        <div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div>
-        <div class="hill h1"></div><div class="hill h2"></div>
-        <div class="sea"><i></i><i></i><i></i></div>
-        <div class="sand"></div><div class="palm"><b></b><b></b><b></b><b></b><span></span></div>
-        <div class="visual-card"><span class="pin">●</span><p><small>ÚLTIMO REGISTRO</small><strong>Garrafas plásticas</strong><span>Praia do Pontal · há 12 min</span></p></div>
-      </div>
-    </section>
-    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 34c240 58 420-26 720 8s492 26 720-20v58H0Z"/></svg>
-  </header>
-
-  <main>
-    <section class="steps container" id="como-funciona">
-      <div class="section-heading"><span class="eyebrow dark"><span></span> Sua atitude faz a diferença</span><h2>Encontrou lixo na praia?</h2><p>Em menos de um minuto, seu registro vira informação para quem pode agir.</p></div>
-      <div class="step-grid">
-        <article><span class="step-number">01</span><div class="step-icon">⌁</div><h3>Fotografe</h3><p>Registre o resíduo encontrado de forma clara e segura.</p></article>
-        <article><span class="step-number">02</span><div class="step-icon">⌖</div><h3>Localize</h3><p>Confirme a localização para marcar o ponto exato no mapa.</p></article>
-        <article><span class="step-number">03</span><div class="step-icon">✓</div><h3>Denuncie</h3><p>Envie o registro e ajude a mobilizar uma resposta coletiva.</p></article>
-      </div>
-    </section>
-
-    <section class="report-section" id="denuncia">
-      <div class="container report-layout">
-        <div class="report-copy"><span class="eyebrow light"><span></span> Faça sua parte</span><h2>Registre uma<br>ocorrência</h2><p>Cada ponto no mapa ajuda pesquisadores, voluntários e órgãos locais a entender onde agir primeiro.</p><blockquote>“A mudança começa quando enxergamos o problema juntos.”</blockquote></div>
-        <form class="report-card" id="report-form">
-          <div class="form-title"><div><span>1</span></div><p><strong>Conte o que você encontrou</strong><small>Leva menos de 1 minuto</small></p></div>
-          <label class="upload-zone" for="foto"><input type="file" id="foto" accept="image/*"><span class="camera">⌑</span><strong id="upload-title">Adicione uma foto</strong><small id="upload-text">Arraste ou toque para selecionar · PNG ou JPG</small></label>
-          <div class="field-row">
-            <label class="field"><span>Tipo de resíduo</span><select id="tipo" required><option value="">Selecione uma categoria</option><option>Plástico</option><option>Vidro</option><option>Metal</option><option>Rede de pesca</option><option>Resíduo orgânico</option><option>Outro</option></select></label>
-            <label class="field"><span>Quantidade aproximada</span><select id="quantidade"><option>Pouco (1–5 itens)</option><option>Médio (6–20 itens)</option><option>Muito (+20 itens)</option></select></label>
-          </div>
-          <label class="field"><span>Comentário sobre o local</span><textarea id="comentario" maxlength="280" placeholder="Ex.: Há muitas garrafas próximas às pedras..." required></textarea><small class="char-count"><span id="char-count">0</span>/280</small></label>
-          <label class="field"><span>Localização do registro</span><div class="location-input"><span>⌖</span><input id="gps" value="Nenhuma localização marcada" readonly><button type="button" id="location-btn">Usar GPS</button></div><div class="location-options"><small class="location-feedback" id="location-feedback">Use o GPS ou escolha o ponto diretamente no mapa.</small><button type="button" id="manual-location-btn">Escolher no mapa →</button></div></label>
-          <button class="submit-btn" type="submit">Enviar denúncia <span>→</span></button>
-          <p class="privacy">🔒 Seus dados pessoais não serão divulgados.</p>
-          <div class="success" id="success" role="status">✓ Denúncia registrada! Obrigado por cuidar da nossa praia.</div>
-        </form>
-      </div>
-    </section>
-
-    <section class="dashboard container" id="mapa">
-      <div class="section-heading left"><span class="eyebrow dark"><span></span> Panorama local</span><h2>O que o mapa nos conta</h2><p>Dados colaborativos que revelam os pontos que mais precisam de atenção.</p><div class="map-legend"><span><i class="pending"></i> Denúncia pendente</span><span><i class="resolved"></i> Resolvido</span><span><i class="community"></i> Ponto livre</span><span><i class="selected"></i> Local selecionado</span></div></div>
-      <div class="dashboard-grid">
-        <div class="map-card">
-          <div class="map-head"><p><strong>Barra do Cunhaú</strong><span id="map-status">Clique livremente no mapa para comentar e registrar um ponto</span></p><button class="map-locate" id="map-location-btn" type="button">⌖ Marcar minha localização</button></div>
-          <div id="leaflet-map" aria-label="Mapa interativo de ocorrências em Barra do Cunhaú"></div>
+        <div class="container copyright">
+            <span>© 2026 MaresIA. Feito com cuidado no litoral potiguar.</span>
+            <span>Barra do Cunhaú e Bahia Formosa RN</span>
         </div>
-        <aside class="records-panel">
-          <div class="records-summary"><div><strong id="total-count">0</strong><span>registros</span></div><div><strong id="pending-count">0</strong><span>pendentes</span></div><div><strong id="resolved-count">0</strong><span>resolvidos</span></div></div>
-          <div class="records-head"><div><strong>Registros recentes</strong><span>Clique para localizar no mapa</span></div><select id="status-filter" aria-label="Filtrar registros"><option value="all">Todos</option><option value="pending">Não resolvidos</option><option value="resolved">Resolvidos</option></select></div>
-          <div class="records-list" id="records-list"></div>
-        </aside>
-      </div>
-    </section>
+    </footer>
 
-    <section class="cta"><div class="container"><div><span class="eyebrow light"><span></span> Juntos pela costa</span><h2>Uma praia limpa começa<br>com um olhar atento.</h2></div><a class="btn btn-white" href="#denuncia">Fazer meu registro <span>→</span></a></div></section>
-  </main>
-
-  <footer><div class="container footer-grid"><div><a class="logo" href="#inicio"><span class="logo-icon">≈</span><span>maresia</span></a><p>Tecnologia e comunidade unidas pela preservação das nossas praias.</p></div><div><strong>Navegue</strong><a href="#como-funciona">Como funciona</a><a href="#mapa">Mapa de ocorrências</a><a href="#denuncia">Fazer denúncia</a></div><div><strong>Projeto acadêmico</strong><p>Educação Ambiental<br>IFRN · Campus Canguaretama</p></div></div><div class="container copyright"><span>© 2026 Maresia. Feito com cuidado no litoral potiguar.</span><span>Barra do Cunhaú e · Canguaretama, RN</span></div></footer>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="script.js"></script>
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="script.js"></script>
 </body>
 </html>

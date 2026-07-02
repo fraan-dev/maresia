@@ -13,7 +13,7 @@ import java.time.Instant;
 @Table(name = "reports")
 public class Report {
     @Id private String id;
-    @NotBlank private String type;
+    private String type;
     @NotBlank private String quantity;
     @NotBlank @Column(length = 500) private String comment;
     @Lob @Column(columnDefinition = "CLOB") private String photo;
